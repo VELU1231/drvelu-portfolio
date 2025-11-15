@@ -1,11 +1,11 @@
 /*
-DrVelu Portfolio - Single-file React component (App.jsx)
+DrVelu Portfolio - Single-file React TypeScript component (App.tsx)
 Tailwind CSS required. This file is a ready-to-run React component you can drop into a Vite or Next.js app.
 
 Usage: 
 - Create a new React app (Vite or Next.js).
 - Install Tailwind CSS per official docs (https://tailwindcss.com/docs/installation).
-- Drop this file as src/App.jsx (Vite) or components/Portfolio.jsx (Next.js) and import it.
+- Drop this file as src/App.tsx (Vite) or components/Portfolio.tsx (Next.js) and import it.
 
 Deployment:
 - For free hosting use Vercel (recommended) or GitHub Pages.
@@ -20,10 +20,17 @@ Customize:
 - Top-center text overlay on project images is implemented with .overlay class.
 */
 
-import React from 'react';
+// Project type definition
+type Project = {
+  id: number;
+  title: string;
+  desc: string;
+  url: string;
+  img: string;
+};
 
-export default function DrVeluPortfolio() {
-  const projects = [
+const DrVeluPortfolio: React.FC = () => {
+  const projects: Project[] = [
     {
       id: 1,
       title: 'Word Puzzle — Speed Challenge',
@@ -65,7 +72,7 @@ export default function DrVeluPortfolio() {
             href="https://ko-fi.com/yourname" /* replace with Ko-fi / BuyMeACoffee / Patreon link */
             target="_blank"
             rel="noreferrer"
-            className="ml-3 inline-block px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg text-sm font-semibold shadow-lg hover:opacity-95"
+            className="ml-3 inline-block px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg text-sm font-semibold shadow-lg hover:opacity-90 transition-opacity"
           >
             Support
           </a>
@@ -103,8 +110,8 @@ export default function DrVeluPortfolio() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map(p => (
-              <a key={p.id} href={p.url} target="_blank" rel="noreferrer" className="group block rounded-2xl overflow-hidden bg-gray-900 border border-gray-800 hover:border-purple-600 transition-shadow shadow-lg project-card">
+            {projects.map((p: Project) => (
+              <a key={p.id} href={p.url} target="_blank" rel="noreferrer" className="group block rounded-2xl overflow-hidden bg-gray-900 border border-gray-800 hover:border-purple-600 transition-shadow hover:shadow-2xl shadow-lg project-card">
                 <div className="relative h-44 md:h-40 lg:h-36">
                   <img src={p.img} alt={p.title} className="w-full h-full object-cover" />
                   {/* Top-center overlay (user preference for text overlays in upper-middle/top-center) */}
@@ -162,4 +169,6 @@ export default function DrVeluPortfolio() {
       </main>
     </div>
   );
-}
+};
+
+export default DrVeluPortfolio;
