@@ -1,52 +1,55 @@
 /*
-DrVelu Portfolio - Single-file React component (App.jsx)
-Tailwind CSS required. This file is a ready-to-run React component you can drop into a Vite or Next.js app.
+DrVelu Portfolio - Single-file React component (App.tsx)
+Tailwind CSS required. This file is a ready-to-run React + TypeScript component you can drop into a Vite or Next.js app.
 
-Usage: 
-- Create a new React app (Vite or Next.js).
+Usage:
+- Create a new React app (Vite or Next.js) with TypeScript support.
 - Install Tailwind CSS per official docs (https://tailwindcss.com/docs/installation).
-- Drop this file as src/App.jsx (Vite) or components/Portfolio.jsx (Next.js) and import it.
+- Replace src/App.tsx in your project with this file and run the dev server.
 
-Deployment:
-- For free hosting use Vercel (recommended) or GitHub Pages.
-- Connect your GitHub repo and deploy. Add your custom domain drvelu.com in Vercel dashboard.
-
-How to add projects:
-- Each project card has a `href` that points to the live app. Replace `#` with your project's URL.
-- To add a new project, copy the <a> block with className="project-card" inside the projects grid.
-
-Customize:
-- Colors, fonts, and copy are easy to edit via Tailwind classes below.
-- Top-center text overlay on project images is implemented with .overlay class.
+Notes:
+- Replace placeholder links (support, project URLs) with your live links.
+- The file is self-contained and typed. It removes all truncated placeholders and fixes invalid JSX/classNames.
 */
 
-import React from 'react';
+import React from "react";
 
-export default function DrVeluPortfolio() {
-  const projects = [
-    {
-      id: 1,
-      title: 'Word Puzzle — Speed Challenge',
-      desc: 'Guess 10 words in 60 seconds. Fast, mobile-friendly, addictive.',
-      url: '#', // <-- replace with live project URL after deploying
-      img: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=abc'
-    },
-    {
-      id: 2,
-      title: 'Snake — Classic Browser',
-      desc: 'Retro snake gameplay, responsive and smooth on mobile.',
-      url: '#',
-      img: 'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=def'
-    },
-    {
-      id: 3,
-      title: 'YouTube SEO Autotool',
-      desc: 'Generate optimized titles & tags in seconds.',
-      url: '#',
-      img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=ghi'
-    }
-  ];
+type Project = {
+  id: number;
+  title: string;
+  desc: string;
+  url: string;
+  img: string;
+};
 
+const projects: Project[] = [
+  {
+    id: 1,
+    title: "Word Puzzle — Speed Challenge",
+    desc: "Guess 10 words in 60 seconds. Fast, mobile-friendly, addictive.",
+    url: "#",
+    img:
+      "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=abc",
+  },
+  {
+    id: 2,
+    title: "Snake — Classic Browser",
+    desc: "Retro snake gameplay, responsive and smooth on mobile.",
+    url: "#",
+    img:
+      "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=def",
+  },
+  {
+    id: 3,
+    title: "YouTube SEO Autotool",
+    desc: "Generate optimized titles & tags in seconds.",
+    url: "#",
+    img:
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=ghi",
+  },
+];
+
+const DrVeluPortfolio: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-gray-100 antialiased">
       <header className="max-w-5xl mx-auto px-6 py-8 flex items-center justify-between">
@@ -62,10 +65,10 @@ export default function DrVeluPortfolio() {
           <a href="#about" className="text-sm text-gray-400 hover:text-white/80">About</a>
           <a href="#contact" className="text-sm text-gray-400 hover:text-white/80">Contact</a>
           <a
-            href="https://ko-fi.com/yourname" /* replace with Ko-fi / BuyMeACoffee / Patreon link */
+            href="#"
             target="_blank"
             rel="noreferrer"
-            className="ml-3 inline-block px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg text-sm font-semibold shadow-lg hover:opacity-95"
+            className="ml-3 inline-block px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg text-sm font-semibold shadow-lg hover:opacity-90 transition-shadow hover:shadow-2xl"
           >
             Support
           </a>
@@ -77,7 +80,7 @@ export default function DrVeluPortfolio() {
           <div className="rounded-2xl p-12 bg-gradient-to-br from-gray-900 via-black to-transparent shadow-2xl">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="flex-1">
-                <h2 className="text-4xl md:text-5xl font-extrabold leading-tight">Hey, I’m Velu — I build useful web tools and playful micro‑apps.</h2>
+                <h2 className="text-4xl md:text-5xl font-extrabold leading-tight">Hey, I'm Velu — I build useful web tools and playful micro‑apps.</h2>
                 <p className="mt-4 text-gray-300 max-w-xl">Everything I ship is lightweight, mobile-friendly, and built to be useful. Explore small apps and projects you can try right now.</p>
 
                 <div className="mt-6 flex gap-3">
@@ -104,10 +107,9 @@ export default function DrVeluPortfolio() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map(p => (
-              <a key={p.id} href={p.url} target="_blank" rel="noreferrer" className="group block rounded-2xl overflow-hidden bg-gray-900 border border-gray-800 hover:border-purple-600 transition-shadow shadow-lg project-card">
+              <a key={p.id} href={p.url} target="_blank" rel="noreferrer" className="group block rounded-2xl overflow-hidden bg-gray-900 border border-gray-800 hover:border-purple-600 transition-shadow hover:shadow-2xl shadow-lg">
                 <div className="relative h-44 md:h-40 lg:h-36">
                   <img src={p.img} alt={p.title} className="w-full h-full object-cover" />
-                  {/* Top-center overlay (user preference for text overlays in upper-middle/top-center) */}
                   <div className="absolute left-1/2 transform -translate-x-1/2 top-6 px-3 py-1 bg-black/60 rounded-full text-xs font-semibold">{p.title}</div>
                 </div>
                 <div className="p-4">
@@ -121,7 +123,6 @@ export default function DrVeluPortfolio() {
               </a>
             ))}
 
-            {/* Example placeholder card for adding more projects */}
             <div className="rounded-2xl border border-dashed border-gray-800 p-6 flex items-center justify-center text-center text-gray-500">
               <div>
                 <div className="mb-2 font-semibold">Add Project</div>
@@ -152,7 +153,7 @@ export default function DrVeluPortfolio() {
             </div>
 
             <div className="flex gap-3">
-              <a href="https://ko-fi.com/yourname" target="_blank" rel="noreferrer" className="px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg font-semibold shadow">Support</a>
+              <a href="#" target="_blank" rel="noreferrer" className="px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg font-semibold shadow">Support</a>
               <a href="#projects" className="px-4 py-2 border border-gray-700 rounded-lg text-gray-300">See Projects</a>
             </div>
           </div>
@@ -162,4 +163,6 @@ export default function DrVeluPortfolio() {
       </main>
     </div>
   );
-}
+};
+
+export default DrVeluPortfolio;
