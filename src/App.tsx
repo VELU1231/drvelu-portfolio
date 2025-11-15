@@ -1,51 +1,55 @@
 /*
-DrVelu Portfolio - Single-file React component (App.jsx)
-Tailwind CSS required. This file is a ready-to-run React component you can drop into a Vite or Next.js app.
+DrVelu Portfolio - Single-file React component (App.tsx)
+Tailwind CSS required. This file is a ready-to-run React + TypeScript component you can drop into a Vite or Next.js app.
 
-Usage: 
-- Create a new React app (Vite or Next.js).
+Usage:
+- Create a new React app (Vite or Next.js) with TypeScript support.
 - Install Tailwind CSS per official docs (https://tailwindcss.com/docs/installation).
-- Drop this file as src/App.jsx (Vite) or components/Portfolio.jsx (Next.js) and import it.
+- Replace src/App.tsx in your project with this file and run the dev server.
 
-Deployment:
-- For free hosting use Vercel (recommended) or GitHub Pages.
-- Connect your GitHub repo and deploy. Add your custom domain drvelu.com in Vercel dashboard.
-
-How to add projects:
-- Each project card has a `href` that points to the live app. Replace `#` with your project's URL.
-- To add a new project, copy the <a> block with className="project-card" inside the projects grid.
-
-Customize:
-- Colors, fonts, and copy are easy to edit via Tailwind classes below.
-- Top-center text overlay on project images is implemented with .overlay class.
+Notes:
+- Replace placeholder links (support, project URLs) with your live links.
+- The file is self-contained and typed. It removes all truncated placeholders and fixes invalid JSX/classNames.
 */
 
-import React from 'react';
+import React from "react";
 
-export default function DrVeluPortfolio() {
-  const projects = [
-    {
-      id: 1,
-      title: 'Word Puzzle — Speed Challenge',
-      desc: 'Guess 10 words in 60 seconds. Fast, mobile-friendly, addictive.',
-      url: '#', // <-- replace with live project URL after deploying
-      img: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=abc'
-    },
-    {
-      id: 2,
-      title: 'Snake — Classic Browser',
-      desc: 'Retro snake gameplay, responsive and smooth on mobile.',
-      url: '#',
-      img: 'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=def'
-    },
-    {
-      id: 3,
-      title: 'YouTube SEO Autotool',
-      desc: 'Generate optimized titles & tags in seconds.',
-      url: '#',
-      img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=ghi'
-    }
-  ];
+type Project = {
+  id: number;
+  title: string;
+  desc: string;
+  url: string;
+  img: string;
+};
+
+const projects: Project[] = [
+  {
+    id: 1,
+    title: "Word Puzzle — Speed Challenge",
+    desc: "Guess 10 words in 60 seconds. Fast, mobile-friendly, addictive.",
+    url: "#", // <-- replace with live project URL after deploying
+    img:
+      "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=abc",
+  },
+  {
+    id: 2,
+    title: "Snake — Classic Browser",
+    desc: "Retro snake gameplay, responsive and smooth on mobile.",
+    url: "#",
+    img:
+      "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=def",
+  },
+  {
+    id: 3,
+    title: "YouTube SEO Autotool",
+    desc: "Generate optimized titles & tags in seconds.",
+    url: "#",
+    img:
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=ghi",
+  },
+];
+
+const DrVeluPortfolio: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black text-gray-100 antialiased">
@@ -104,7 +108,13 @@ export default function DrVeluPortfolio() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map(p => (
-              <a key={p.id} href={p.url} target="_blank" rel="noreferrer" className="group block rounded-2xl overflow-hidden bg-gray-900 border border-gray-800 hover:border-purple-600 transition-shadow shadow-lg project-card">
+              <a
+                key={p.id}
+                href={p.url}
+                target="_blank"
+                rel="noreferrer"
+                className="group block rounded-2xl overflow-hidden bg-gray-900 border border-gray-800 hover:border-purple-600 transition-shadow hover:shadow-2xl"
+              >
                 <div className="relative h-44 md:h-40 lg:h-36">
                   <img src={p.img} alt={p.title} className="w-full h-full object-cover" />
                   {/* Top-center overlay (user preference for text overlays in upper-middle/top-center) */}
@@ -134,7 +144,9 @@ export default function DrVeluPortfolio() {
         <section id="about" className="mb-12">
           <div className="rounded-xl p-6 bg-gray-900 border border-gray-800">
             <h3 className="font-bold text-xl">About</h3>
-            <p className="text-gray-300 mt-3">I graduated in Biology and now design small, useful web experiences using Python + JavaScript. I teach, build, and iterate quickly — everything here is made to be deployed fast and improved often.</p>
+            <p className="text-gray-300 mt-3">
+              I graduated in Biology and now design small, useful web experiences using Python + JavaScript. I teach, build, and iterate quickly — everything here is lightweight and designed for fast experimentation.
+            </p>
             <ul className="mt-4 text-gray-400 space-y-1 text-sm">
               <li>• Skills: Python, Django basics, HTML/CSS, JavaScript</li>
               <li>• Interests: Data storytelling, game microapps, automation</li>
@@ -147,19 +159,47 @@ export default function DrVeluPortfolio() {
           <div className="rounded-xl p-6 bg-gray-900 border border-gray-800 flex flex-col md:flex-row gap-6 items-center justify-between">
             <div>
               <h4 className="font-bold text-lg">Contact</h4>
-              <p className="text-gray-400 mt-2">Email: <a className="text-purple-300" href="mailto:velu2k03@gmail.com">velu2k03@gmail.com</a></p>
-              <p className="text-gray-400">LinkedIn: <a className="text-purple-300" href="https://www.linkedin.com/in/velu-2k03" target="_blank" rel="noreferrer">velu-2k03</a></p>
+              <p className="text-gray-400 mt-2">
+                Email: {" "}
+                <a className="text-purple-300" href="mailto:velu2k03@gmail.com">
+                  velu2k03@gmail.com
+                </a>
+              </p>
+              <p className="text-gray-400">
+                LinkedIn: {" "}
+                <a
+                  className="text-purple-300"
+                  href="https://www.linkedin.com/in/velu-2k03"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  velu-2k03
+                </a>
+              </p>
             </div>
 
             <div className="flex gap-3">
-              <a href="https://ko-fi.com/yourname" target="_blank" rel="noreferrer" className="px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg font-semibold shadow">Support</a>
-              <a href="#projects" className="px-4 py-2 border border-gray-700 rounded-lg text-gray-300">See Projects</a>
+              <a
+                href="https://ko-fi.com/yourname"
+                target="_blank"
+                rel="noreferrer"
+                className="px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg font-semibold shadow"
+              >
+                Support
+              </a>
+              <a href="#projects" className="px-4 py-2 border border-gray-700 rounded-lg text-gray-300">
+                See Projects
+              </a>
             </div>
           </div>
         </section>
 
-        <footer className="mt-12 text-center text-gray-500 text-sm">© {new Date().getFullYear()} DrVelu · Built with curiosity and a laptop</footer>
+        <footer className="mt-12 text-center text-gray-500 text-sm">
+          © {new Date().getFullYear()} DrVelu · Built with curiosity and a laptop
+        </footer>
       </main>
     </div>
   );
-}
+};
+
+export default DrVeluPortfolio;
