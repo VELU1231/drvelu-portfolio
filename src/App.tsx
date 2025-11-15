@@ -49,7 +49,7 @@ export default function App() {
       title: 'YouTube SEO Autotool',
       desc: 'Generate optimized titles & tags in seconds.',
       url: '#',
-      img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=ghi'
+      img: 'https://images.unsplash.com/photo-151938995047s=ghi'
     }
   ];
 
