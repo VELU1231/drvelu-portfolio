@@ -20,7 +20,7 @@ Customize:
 - Top-center text overlay on project images is implemented with .overlay class.
 */
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { client } from './sanityClient';
 
 interface Project {
