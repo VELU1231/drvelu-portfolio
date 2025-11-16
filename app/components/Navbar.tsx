@@ -30,8 +30,10 @@ export function Navbar() {
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
             <NavLink href="#home">Home</NavLink>
+                      <NavLink href="/about">About</NavLink>
             <NavLink href="#projects">Projects</NavLink>
             <NavLink href="#skills">Skills</NavLink>
+                      <NavLink href="/apps">Games & Apps</NavLink>
             <NavLink href="#blog">Blog</NavLink>
             <NavLink href="#contact">Contact</NavLink>
           </div>
