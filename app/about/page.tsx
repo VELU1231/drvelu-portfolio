@@ -1,4 +1,7 @@
-import { Navbar } from '../components/Navbar';import { Footer } from '@/app/components/Footer';
+'use client';
+
+import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
 
 export default function About() {
   return (
