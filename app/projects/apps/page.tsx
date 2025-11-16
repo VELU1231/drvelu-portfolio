@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
-import Footer from '@/app/components/Footer';
-
+import { Footer } from '@/app/components/Footer';
 function GameShowcase() {
   const [flappyScore, setFlappyScore] = useState(0);
   const [gameRunning, setGameRunning] = useState(false);
