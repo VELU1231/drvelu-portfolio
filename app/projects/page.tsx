@@ -1,5 +1,4 @@
-import Footer from '@/app/components/Footer';
-
+import Footer from '../components/Footer';
 const projects = [
   {
     id: 1,
