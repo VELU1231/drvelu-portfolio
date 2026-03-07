@@ -8,9 +8,9 @@ import { underlineExpand } from '../lib/animations';
 
 const NAV_LINKS = [
   { href: '#home', label: 'Home' },
-  { href: '/about', label: 'About' },
   { href: '#projects', label: 'Projects' },
   { href: '#skills', label: 'Skills' },
+  { href: '#blog', label: 'Blog' },
   { href: '#contact', label: 'Contact' },
 ];
 
@@ -44,7 +44,7 @@ export function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo — scale on hover */}
           <Link href="/" className="flex items-center gap-2.5 group no-underline">
@@ -126,7 +126,7 @@ export function Navbar() {
             transition={{ duration: 0.25, ease: 'easeOut' }}
             className="md:hidden bg-slate-950/95 backdrop-blur-md border-b border-slate-800 overflow-hidden"
           >
-            <div className="max-w-5xl mx-auto px-4 py-4 flex flex-col gap-1">
+            <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
               {NAV_LINKS.map((link, i) => (
                 <motion.div
                   key={link.href}

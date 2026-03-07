@@ -19,13 +19,13 @@ export function Footer() {
     { href: '#home', label: 'Home' },
     { href: '#projects', label: 'Projects' },
     { href: '#skills', label: 'Skills' },
+    { href: '#blog', label: 'Blog' },
     { href: '#contact', label: 'Contact' },
-    { href: '/about', label: 'About' },
   ];
 
   return (
     <footer className="bg-slate-950 border-t border-slate-800">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div
           className="flex flex-col md:flex-row justify-between items-start gap-10 mb-10"
           variants={staggerContainer}

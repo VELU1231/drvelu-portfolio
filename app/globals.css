@@ -38,3 +38,23 @@
   background: #475569;
 }
 
+/* Dot-grid hero background — subtle radial pattern seen on Vercel / Linear */
+.bg-dot-grid {
+  background-image: radial-gradient(circle, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Gradient border utility — wrap content div with this + inner bg */
+.gradient-border {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.5), rgba(139, 92, 246, 0.5), rgba(236, 72, 153, 0.5));
+  padding: 1px;
+  border-radius: 1rem;
+}
+
+/* Glass card */
+.glass {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
