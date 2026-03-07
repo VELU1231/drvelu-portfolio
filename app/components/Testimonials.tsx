@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
 
 interface Testimonial {
@@ -17,7 +18,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: 'Sarah Johnson',
     title: 'Product Manager',
     company: 'TechCorp Inc.',
-    testimonial: 'Velu delivered an exceptional e-commerce platform that exceeded our expectations. His attention to detail and technical expertise transformed our vision into reality. A true professional who understands both design and development.',
+    testimonial: 'Velu delivered an exceptional e-commerce platform that exceeded our expectations. His attention to detail and technical expertise transformed our vision into reality.',
     rating: 5,
   },
   {
@@ -25,7 +26,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: 'Michael Chen',
     title: 'CEO',
     company: 'StartupX',
-    testimonial: 'Working with Velu on our AI chat application was a game-changer. His ability to implement complex real-time features with WebSocket was impressive. Highly recommended for any ambitious project.',
+    testimonial: 'Working with Velu on our AI chat application was a game-changer. His ability to implement complex real-time features was impressive. Highly recommended.',
     rating: 5,
   },
   {
@@ -33,7 +34,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: 'Emma Rodriguez',
     title: 'Data Analytics Lead',
     company: 'InsightHub',
-    testimonial: 'The interactive dashboard Velu built for us provides real-time analytics that our team relies on daily. The performance optimization and responsive design are outstanding. Great work!',
+    testimonial: 'The interactive dashboard Velu built provides real-time analytics that our team relies on daily. The performance and responsive design are outstanding.',
     rating: 5,
   },
   {
@@ -41,44 +42,59 @@ const TESTIMONIALS: Testimonial[] = [
     name: 'James Wilson',
     title: 'Operations Director',
     company: 'PlanMaster SaaS',
-    testimonial: 'Velu created a task management platform that our entire organization uses daily. The Material-UI integration and user experience are seamless. He\'s a developer who truly cares about the end-user experience.',
+    testimonial: "Velu created a task management platform our entire organisation uses daily. The UX is seamless. He's a developer who truly cares about the end-user experience.",
     rating: 5,
   },
 ];
 
-const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
-  <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-lg border border-slate-700 hover:border-accent-primary transition-colors">
-    <div className="flex gap-1 mb-4">
-      {Array.from({ length: testimonial.rating }).map((_, i) => (
-        <Star key={i} size={16} className="fill-yellow-400 text-yellow-400" />
-      ))}
-    </div>
-    <p className="text-text-secondary mb-4 leading-relaxed">{testimonial.testimonial}</p>
-    <div>
-      <p className="font-semibold text-white">{testimonial.name}</p>
-      <p className="text-sm text-text-secondary">
-        {testimonial.title} at {testimonial.company}
-      </p>
-    </div>
-  </div>
-);
-
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-12 text-center">
-          <h2 className="text-4xl font-bold mb-4 text-white">
+    <section id="testimonials" className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-900">
+      <div className="max-w-5xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <p className="text-blue-400 text-sm font-semibold tracking-widest uppercase mb-3">Testimonials</p>
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             What Clients Say
           </h2>
-          <p className="text-text-secondary text-lg">
-            Feedback from satisfied clients and collaborators
+          <p className="text-slate-400 text-lg max-w-xl mx-auto">
+            Feedback from people I&apos;ve had the pleasure of working with.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {TESTIMONIALS.map((testimonial) => (
-            <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+        <div className="grid md:grid-cols-2 gap-5">
+          {TESTIMONIALS.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="bg-slate-950 rounded-2xl p-6 border border-slate-800 hover:border-slate-700 transition-colors"
+            >
+              <div className="flex gap-0.5 mb-4">
+                {Array.from({ length: item.rating }).map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                ))}
+              </div>
+              <p className="text-slate-400 text-sm leading-relaxed mb-5">{item.testimonial}</p>
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                  {item.name[0]}
+                </div>
+                <div>
+                  <p className="font-semibold text-white text-sm">{item.name}</p>
+                  <p className="text-slate-500 text-xs">
+                    {item.title} · {item.company}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

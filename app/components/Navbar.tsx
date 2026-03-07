@@ -1,64 +1,119 @@
 'use client';
 
 import Link from 'next/link';
-import { ThemeToggle } from './ThemeToggle';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+
+const NAV_LINKS = [
+  { href: '#home', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#contact', label: 'Contact' },
+];
 
 export function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-gray-200 dark:border-gray-700"
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-slate-950/90 backdrop-blur-md border-b border-slate-800/60 shadow-lg shadow-black/20'
+          : 'bg-transparent'
+      }`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo/Brand */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center group-hover:shadow-lg group-hover:shadow-cyan-500/50 transition-all"
-            >
-              <span className="text-white font-bold text-lg">V</span>
-            </motion.div>
-            <span className="hidden sm:inline font-bold text-lg bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
-              Velu
-            </span>
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2.5 group no-underline">
+            <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-violet-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-blue-500/30 transition-shadow">
+              <span className="text-white font-bold text-base">V</span>
+            </div>
+            <span className="font-bold text-lg text-white tracking-tight">Velu</span>
           </Link>
 
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            <NavLink href="#home">Home</NavLink>
-                      <NavLink href="/about">About</NavLink>
-            <NavLink href="#projects">Projects</NavLink>
-            <NavLink href="#skills">Skills</NavLink>
-                      <NavLink href="/apps">Games & Apps</NavLink>
-            <NavLink href="#blog">Blog</NavLink>
-            <NavLink href="#contact">Contact</NavLink>
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-1">
+            {NAV_LINKS.map((link) => (
+              <NavLink key={link.href} href={link.href}>
+                {link.label}
+              </NavLink>
+            ))}
+            <Link
+              href="#contact"
+              className="ml-4 px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-lg transition-colors no-underline"
+            >
+              Hire Me
+            </Link>
           </div>
 
-          {/* Theme Toggle */}
-          <ThemeToggle />
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 text-slate-300 hover:text-white transition-colors rounded-lg hover:bg-slate-800"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden bg-slate-950/95 backdrop-blur-md border-b border-slate-800"
+          >
+            <div className="max-w-5xl mx-auto px-4 py-4 flex flex-col gap-1">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="px-4 py-2.5 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg font-medium transition-colors no-underline"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href="#contact"
+                onClick={() => setMobileOpen(false)}
+                className="mt-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors text-center no-underline"
+              >
+                Hire Me
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }
 
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-      className="relative"
+    <Link
+      href={href}
+      className="px-4 py-2 text-sm text-slate-300 hover:text-white font-medium transition-colors rounded-lg hover:bg-slate-800/60 no-underline"
     >
-      <Link
-        href={href}
-        className="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 font-medium transition-colors relative group"
-      >
-        {children}
-        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-600 group-hover:w-full transition-all duration-300"></span>
-      </Link>
-    </motion.div>
+      {children}
+    </Link>
   );
 }
