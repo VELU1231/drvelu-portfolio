@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Code2, Database, Cloud, Wrench } from 'lucide-react';
+import { fadeInUp, staggerContainer, cardHoverSm, iconHover } from '../lib/animations';
 
 const skillCategories = [
   {
@@ -57,41 +58,55 @@ export function Skills() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {skillCategories.map((category, index) => {
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+        >
+          {skillCategories.map((category) => {
             const IconComponent = category.icon;
             const colors = colorMap[category.color];
             return (
               <motion.div
                 key={category.category}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className={`bg-slate-950 rounded-2xl p-5 border ${colors.border} hover:border-opacity-60 transition-all duration-300 hover:shadow-lg hover:shadow-black/30`}
+                variants={fadeInUp}
+                initial="rest"
+                whileHover="hover"
+                animate="rest"
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`p-2.5 ${colors.iconBg} rounded-xl`}>
-                    <IconComponent className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className="text-base font-bold text-white">{category.category}</h3>
-                </div>
-
-                <div className="flex flex-wrap gap-1.5">
-                  {category.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className={`px-2.5 py-0.5 text-xs font-medium border rounded-full ${colors.badge}`}
+                <motion.div
+                  variants={cardHoverSm}
+                  className={`bg-slate-950 rounded-2xl p-5 border ${colors.border} transition-colors duration-300 hover:shadow-lg hover:shadow-black/30 h-full`}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <motion.div
+                      variants={iconHover}
+                      className={`p-2.5 ${colors.iconBg} rounded-xl`}
                     >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+                      <IconComponent className="w-5 h-5 text-white" />
+                    </motion.div>
+                    <h3 className="text-base font-bold text-white">{category.category}</h3>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5">
+                    {category.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className={`px-2.5 py-0.5 text-xs font-medium border rounded-full ${colors.badge}`}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
+

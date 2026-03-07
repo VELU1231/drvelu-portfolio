@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Github, ExternalLink } from 'lucide-react';
+import { fadeInUp, staggerContainer, cardHover, arrowRight, iconHoverLeft } from '../lib/animations';
 
 const projects = [
   {
@@ -63,69 +64,103 @@ export function Projects() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((project, index) => (
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+        >
+          {projects.map((project) => (
             <motion.article
               key={project.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="group bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-slate-600 transition-all duration-300 hover:shadow-2xl hover:shadow-black/40 flex flex-col"
+              variants={fadeInUp}
+              initial="rest"
+              whileHover="hover"
+              animate="rest"
+              style={{ position: 'relative' }}
             >
-              {/* Preview image */}
-              <div className="relative h-44 overflow-hidden bg-slate-800">
-                <img
-                  src={project.image}
-                  alt={`Screenshot of ${project.title}`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-              </div>
+              {/* Lift wrapper */}
+              <motion.div
+                variants={cardHover}
+                className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-slate-600 transition-colors duration-300 hover:shadow-2xl hover:shadow-black/50 flex flex-col h-full"
+              >
+                {/* Preview image */}
+                <div className="relative h-44 overflow-hidden bg-slate-800">
+                  <motion.img
+                    src={project.image}
+                    alt={`Screenshot of ${project.title}`}
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.06 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent pointer-events-none" />
+                </div>
 
-              {/* Content */}
-              <div className="p-6 flex flex-col flex-1">
-                <h3 className="text-lg font-bold text-white mb-2">{project.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed mb-4 flex-1">
-                  {project.description}
-                </p>
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="text-lg font-bold text-white mb-2">{project.title}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-4 flex-1">
+                    {project.description}
+                  </p>
 
-                {/* Tech badges */}
-                <div className="flex flex-wrap gap-1.5 mb-5">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2.5 py-0.5 text-xs font-medium text-blue-300 bg-blue-500/10 border border-blue-500/20 rounded-full"
+                  {/* Tech badges */}
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-0.5 text-xs font-medium text-blue-300 bg-blue-500/10 border border-blue-500/20 rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Links */}
+                  <div className="flex items-center gap-3 pt-4 border-t border-slate-800">
+                    <motion.div
+                      initial="rest"
+                      whileHover="hover"
+                      animate="rest"
+                      className="inline-flex"
                     >
-                      {tag}
-                    </span>
-                  ))}
+                      <Link
+                        href={project.github}
+                        className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors no-underline"
+                        aria-label={`View ${project.title} source on GitHub`}
+                      >
+                        <motion.span variants={iconHoverLeft}>
+                          <Github className="w-4 h-4" />
+                        </motion.span>
+                        Source
+                      </Link>
+                    </motion.div>
+                    <motion.div
+                      initial="rest"
+                      whileHover="hover"
+                      animate="rest"
+                      className="inline-flex ml-auto"
+                    >
+                      <Link
+                        href={project.live}
+                        className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors no-underline"
+                        aria-label={`Open ${project.title} live demo`}
+                      >
+                        Live Demo
+                        <motion.span variants={arrowRight}>
+                          <ExternalLink className="w-4 h-4" />
+                        </motion.span>
+                      </Link>
+                    </motion.div>
+                  </div>
                 </div>
-
-                {/* Links */}
-                <div className="flex items-center gap-3 pt-4 border-t border-slate-800">
-                  <Link
-                    href={project.github}
-                    className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors no-underline"
-                    aria-label={`View ${project.title} source on GitHub`}
-                  >
-                    <Github className="w-4 h-4" />
-                    Source
-                  </Link>
-                  <Link
-                    href={project.live}
-                    className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors no-underline ml-auto"
-                    aria-label={`Open ${project.title} live demo`}
-                  >
-                    Live Demo
-                    <ExternalLink className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
+              </motion.div>
             </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
+

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Mail, Linkedin, Github, Twitter, Send, MapPin } from 'lucide-react';
 import { useState } from 'react';
+import { fadeInUp, staggerContainer, iconHover } from '../lib/animations';
 
 export function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -87,12 +88,18 @@ export function Contact() {
                 />
               </div>
               <motion.button
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
+                whileHover={{ scale: 1.02, boxShadow: '0 8px 30px rgba(37, 99, 235, 0.35)' }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.15 }}
                 type="submit"
                 className="w-full py-3 px-6 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20"
               >
-                <Send className="w-4 h-4" />
+                <motion.span
+                  animate={submitted ? { rotate: [0, -20, 20, 0] } : {}}
+                  transition={{ duration: 0.4 }}
+                >
+                  <Send className="w-4 h-4" />
+                </motion.span>
                 Send Message
               </motion.button>
               {submitted && (
@@ -109,19 +116,25 @@ export function Contact() {
 
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
             className="md:col-span-2 space-y-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
           >
-            <div>
+            <motion.div variants={fadeInUp}>
               <h3 className="text-lg font-semibold text-white mb-4">Get in touch</h3>
               <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-slate-800 rounded-lg mt-0.5">
+                <motion.div variants={fadeInUp} className="flex items-start gap-3">
+                  <motion.div
+                    initial="rest"
+                    whileHover="hover"
+                    animate="rest"
+                    variants={iconHover}
+                    className="p-2 bg-slate-800 rounded-lg mt-0.5"
+                  >
                     <Mail className="w-4 h-4 text-blue-400" />
-                  </div>
+                  </motion.div>
                   <div>
                     <p className="text-xs text-slate-500 mb-0.5">Email</p>
                     <a
@@ -131,20 +144,26 @@ export function Contact() {
                       velu@example.com
                     </a>
                   </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-slate-800 rounded-lg mt-0.5">
+                </motion.div>
+                <motion.div variants={fadeInUp} className="flex items-start gap-3">
+                  <motion.div
+                    initial="rest"
+                    whileHover="hover"
+                    animate="rest"
+                    variants={iconHover}
+                    className="p-2 bg-slate-800 rounded-lg mt-0.5"
+                  >
                     <MapPin className="w-4 h-4 text-blue-400" />
-                  </div>
+                  </motion.div>
                   <div>
                     <p className="text-xs text-slate-500 mb-0.5">Location</p>
                     <p className="text-slate-300 text-sm">India · Remote</p>
                   </div>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
 
-            <div>
+            <motion.div variants={fadeInUp}>
               <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-3">Social</h3>
               <div className="flex gap-2">
                 {[
@@ -156,17 +175,20 @@ export function Contact() {
                     key={label}
                     href={href}
                     aria-label={label}
-                    whileHover={{ scale: 1.1 }}
-                    className="p-2.5 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white rounded-xl transition-all no-underline"
+                    whileHover={{ scale: 1.15, y: -2 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 12 }}
+                    className="p-2.5 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white rounded-xl transition-colors no-underline"
                   >
                     <Icon className="w-5 h-5" />
                   </motion.a>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
     </section>
   );
 }
+

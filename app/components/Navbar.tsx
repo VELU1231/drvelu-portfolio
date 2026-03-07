@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { underlineExpand } from '../lib/animations';
 
 const NAV_LINKS = [
   { href: '#home', label: 'Home' },
@@ -12,6 +13,15 @@ const NAV_LINKS = [
   { href: '#skills', label: 'Skills' },
   { href: '#contact', label: 'Contact' },
 ];
+
+const mobileItemVariants = {
+  hidden: { opacity: 0, x: -10 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.2, delay: i * 0.04, ease: 'easeOut' },
+  }),
+};
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -36,11 +46,16 @@ export function Navbar() {
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+          {/* Logo — scale on hover */}
           <Link href="/" className="flex items-center gap-2.5 group no-underline">
-            <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-violet-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-blue-500/30 transition-shadow">
+            <motion.div
+              whileHover={{ scale: 1.08, rotate: -4 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+              className="w-9 h-9 bg-gradient-to-br from-blue-500 to-violet-600 rounded-lg flex items-center justify-center shadow-md"
+            >
               <span className="text-white font-bold text-base">V</span>
-            </div>
+            </motion.div>
             <span className="font-bold text-lg text-white tracking-tight">Velu</span>
           </Link>
 
@@ -51,23 +66,53 @@ export function Navbar() {
                 {link.label}
               </NavLink>
             ))}
-            <Link
-              href="#contact"
-              className="ml-4 px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-lg transition-colors no-underline"
+            <motion.div
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ duration: 0.15 }}
+              className="ml-4"
             >
-              Hire Me
-            </Link>
+              <Link
+                href="#contact"
+                className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-lg transition-colors no-underline block"
+              >
+                Hire Me
+              </Link>
+            </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
+          <motion.button
+            whileTap={{ scale: 0.9 }}
             className="md:hidden p-2 text-slate-300 hover:text-white transition-colors rounded-lg hover:bg-slate-800"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+            <AnimatePresence mode="wait" initial={false}>
+              {mobileOpen ? (
+                <motion.span
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <X className="w-5 h-5" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <Menu className="w-5 h-5" />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.button>
         </div>
       </div>
 
@@ -75,30 +120,44 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden bg-slate-950/95 backdrop-blur-md border-b border-slate-800"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="md:hidden bg-slate-950/95 backdrop-blur-md border-b border-slate-800 overflow-hidden"
           >
             <div className="max-w-5xl mx-auto px-4 py-4 flex flex-col gap-1">
-              {NAV_LINKS.map((link) => (
-                <Link
+              {NAV_LINKS.map((link, i) => (
+                <motion.div
                   key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="px-4 py-2.5 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg font-medium transition-colors no-underline"
+                  custom={i}
+                  variants={mobileItemVariants}
+                  initial="hidden"
+                  animate="visible"
                 >
-                  {link.label}
-                </Link>
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="block px-4 py-2.5 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg font-medium transition-colors no-underline"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
-              <Link
-                href="#contact"
-                onClick={() => setMobileOpen(false)}
-                className="mt-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors text-center no-underline"
+              <motion.div
+                custom={NAV_LINKS.length}
+                variants={mobileItemVariants}
+                initial="hidden"
+                animate="visible"
               >
-                Hire Me
-              </Link>
+                <Link
+                  href="#contact"
+                  onClick={() => setMobileOpen(false)}
+                  className="mt-2 block px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition-colors text-center no-underline"
+                >
+                  Hire Me
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         )}
@@ -109,11 +168,24 @@ export function Navbar() {
 
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <Link
-      href={href}
-      className="px-4 py-2 text-sm text-slate-300 hover:text-white font-medium transition-colors rounded-lg hover:bg-slate-800/60 no-underline"
+    <motion.div
+      initial="rest"
+      whileHover="hover"
+      animate="rest"
+      className="relative"
     >
-      {children}
-    </Link>
+      <Link
+        href={href}
+        className="relative px-4 py-2 text-sm text-slate-300 hover:text-white font-medium transition-colors rounded-lg no-underline block"
+      >
+        {children}
+        {/* Animated underline */}
+        <motion.span
+          variants={underlineExpand}
+          className="absolute bottom-0.5 left-4 right-4 h-px bg-gradient-to-r from-blue-400 to-violet-400"
+        />
+      </Link>
+    </motion.div>
   );
 }
+

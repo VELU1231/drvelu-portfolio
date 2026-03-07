@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
+import { fadeInUp, staggerContainer, cardHoverSm, staggerFast } from '../lib/animations';
 
 interface Testimonial {
   id: number;
@@ -47,6 +48,15 @@ const TESTIMONIALS: Testimonial[] = [
   },
 ];
 
+const starVariant = {
+  hidden: { opacity: 0, scale: 0.4 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { type: 'spring', stiffness: 500, damping: 18 },
+  },
+};
+
 export default function Testimonials() {
   return (
     <section id="testimonials" className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-900">
@@ -67,37 +77,61 @@ export default function Testimonials() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-5">
-          {TESTIMONIALS.map((item, index) => (
+        <motion.div
+          className="grid md:grid-cols-2 gap-5"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+        >
+          {TESTIMONIALS.map((item) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="bg-slate-950 rounded-2xl p-6 border border-slate-800 hover:border-slate-700 transition-colors"
+              variants={fadeInUp}
+              initial="rest"
+              whileHover="hover"
+              animate="rest"
             >
-              <div className="flex gap-0.5 mb-4">
-                {Array.from({ length: item.rating }).map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                ))}
-              </div>
-              <p className="text-slate-400 text-sm leading-relaxed mb-5">{item.testimonial}</p>
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                  {item.name[0]}
+              <motion.div
+                variants={cardHoverSm}
+                className="bg-slate-950 rounded-2xl p-6 border border-slate-800 hover:border-slate-700 transition-colors h-full"
+              >
+                {/* Stars with stagger entry */}
+                <motion.div
+                  className="flex gap-0.5 mb-4"
+                  variants={staggerFast}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                >
+                  {Array.from({ length: item.rating }).map((_, i) => (
+                    <motion.span key={i} variants={starVariant}>
+                      <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    </motion.span>
+                  ))}
+                </motion.div>
+                <p className="text-slate-400 text-sm leading-relaxed mb-5">{item.testimonial}</p>
+                <div className="flex items-center gap-3">
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 12 }}
+                    className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
+                  >
+                    {item.name[0]}
+                  </motion.div>
+                  <div>
+                    <p className="font-semibold text-white text-sm">{item.name}</p>
+                    <p className="text-slate-500 text-xs">
+                      {item.title} · {item.company}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-semibold text-white text-sm">{item.name}</p>
-                  <p className="text-slate-500 text-xs">
-                    {item.title} · {item.company}
-                  </p>
-                </div>
-              </div>
+              </motion.div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
+
