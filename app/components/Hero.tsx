@@ -98,7 +98,7 @@ export default function Hero() {
                   alt="Velu Murugan standing portrait"
                   fill
                   sizes="(min-width: 1024px) 38vw, 90vw"
-                  className="object-contain object-bottom"
+                  className="object-contain object-center"
                   priority
                 />
               </motion.div>
