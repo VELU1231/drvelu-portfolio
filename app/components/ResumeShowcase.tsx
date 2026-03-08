@@ -81,15 +81,15 @@ export function ResumeShowcase() {
             <div className="space-y-3">
               <div className="rounded-2xl border border-slate-200 bg-white/85 px-4 py-3 flex items-center gap-3">
                 <MapPin className="h-4 w-4 text-sky-700" />
-                <span className="text-sm text-slate-700">Sorsogon, Bicol, Philippines</span>
+                <span className="text-sm text-slate-700">Santa Rosa, laguna, Philippines</span>
               </div>
               <div className="rounded-2xl border border-slate-200 bg-white/85 px-4 py-3 flex items-start gap-3">
                 <Mail className="h-4 w-4 text-sky-700" />
-                <span className="text-sm text-slate-700 break-all">contact@drvelu.com</span>
+                <span className="text-sm text-slate-700 break-all">futureai@drvelu.com</span>
               </div>
               <div className="rounded-2xl border border-slate-200 bg-white/85 px-4 py-3 flex items-center gap-3">
                 <Phone className="h-4 w-4 text-sky-700" />
-                <span className="text-sm text-slate-700">+63 960 718 0399</span>
+                <span className="text-sm text-slate-700">+63 969 155 9821</span>
               </div>
             </div>
           </motion.div>

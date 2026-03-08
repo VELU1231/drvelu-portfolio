@@ -145,7 +145,7 @@ export default function Hero() {
                     src="/images/velu-formal-portrait.jpg"
                     alt="Velu Murugan formal portrait"
                     width={56}
-                    height={72}
+                    height={76}
                     sizes="56px"
                     className="rounded-xl object-cover"
                   />
