@@ -27,8 +27,8 @@ export function Navbar() {
       transition={{ duration: 0.5 }}
       className="sticky top-0 z-50"
     >
-      <div className="section-wrap py-4">
-        <div className="glass-panel rounded-2xl px-4 sm:px-5 py-3 flex items-center justify-between">
+      <div className="section-wrap py-3 sm:py-4">
+        <div className="glass-panel rounded-2xl px-3 sm:px-5 py-2.5 sm:py-3 flex items-center justify-between gap-3">
           <Link href="#home" className="flex items-center gap-3">
             <div className="relative h-10 w-10 rounded-xl overflow-hidden shadow-glass">
               <Image
@@ -41,8 +41,8 @@ export function Navbar() {
               />
             </div>
             <div>
-              <p className="text-sm font-semibold tracking-wide text-slate-900">Velu Murugan</p>
-              <p className="text-xs text-slate-500">Full-Stack Developer Portfolio</p>
+              <p className="text-sm font-semibold tracking-wide text-slate-900 leading-tight">Velu Murugan</p>
+              <p className="hidden sm:block text-xs text-slate-500">Full-Stack Developer Portfolio</p>
             </div>
           </Link>
 
@@ -81,7 +81,7 @@ export function Navbar() {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              className="lg:hidden mt-3 glass-panel rounded-2xl p-4"
+              className="lg:hidden mt-3 glass-panel rounded-2xl p-4 max-h-[75vh] overflow-y-auto"
             >
               <div className="grid gap-2">
                 {navigationLinks.map((link) => (

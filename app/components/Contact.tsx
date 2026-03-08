@@ -15,7 +15,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20">
+    <section id="contact" className="py-16 sm:py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -24,10 +24,10 @@ export function Contact() {
         className="section-wrap text-center mb-14"
       >
         <p className="text-xs uppercase tracking-[0.25em] text-slate-500 mb-3">Contact</p>
-        <h2 className="display-title text-4xl sm:text-5xl text-slate-900 mb-4">
+        <h2 className="display-title text-3xl sm:text-5xl text-slate-900 mb-4">
           Let us build something meaningful.
         </h2>
-        <p className="text-slate-600 text-lg">
+        <p className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto">
           I&apos;m open to full-stack developer roles, freelance projects, and automation collaborations.
         </p>
       </motion.div>
@@ -40,7 +40,7 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="glass-panel rounded-3xl p-6 sm:p-8"
         >
-          <h3 className="text-2xl font-semibold text-slate-900 mb-2">Send a message</h3>
+          <h3 className="text-xl sm:text-2xl font-semibold text-slate-900 mb-2">Send a message</h3>
           <p className="text-slate-600 mb-6">I will respond as soon as possible.</p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -102,7 +102,7 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="glass-panel rounded-3xl p-6 sm:p-8 space-y-7"
         >
-          <h3 className="text-2xl font-semibold text-slate-900">Direct channels</h3>
+          <h3 className="text-xl sm:text-2xl font-semibold text-slate-900">Direct channels</h3>
 
           <div className="flex items-start gap-4">
             <div className="h-11 w-11 rounded-xl bg-sky-100 text-sky-700 grid place-items-center">
@@ -140,7 +140,7 @@ export function Contact() {
 
           <div className="space-y-3 pt-4">
             <p className="font-semibold text-slate-900">Quick actions</p>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               <motion.a
                 href="https://www.linkedin.com/in/velu-2k03"
                 target="_blank"

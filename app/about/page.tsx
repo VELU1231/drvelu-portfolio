@@ -53,7 +53,7 @@ export default function AboutPage() {
     <>
       <Navbar />
       <main className="pb-16">
-        <section className="pt-8 pb-14">
+        <section className="pt-6 sm:pt-8 pb-12 sm:pb-14">
           <div className="section-wrap">
             <div className="glass-panel rounded-[2rem] p-6 md:p-10 lg:p-12 overflow-hidden relative">
               <div className="absolute -top-24 -right-20 h-72 w-72 rounded-full bg-sky-300/25 blur-3xl" />
@@ -64,10 +64,10 @@ export default function AboutPage() {
                   transition={{ duration: 0.7 }}
                 >
                   <p className="text-xs uppercase tracking-[0.25em] text-slate-500 mb-3">About Velu</p>
-                  <h1 className="display-title text-4xl sm:text-5xl text-slate-900 leading-tight">
+                  <h1 className="display-title text-3xl sm:text-5xl text-slate-900 leading-tight">
                     A full-stack developer building modern apps and workflows.
                   </h1>
-                  <p className="mt-5 text-slate-600 text-lg leading-relaxed">
+                  <p className="mt-5 text-slate-600 text-base sm:text-lg leading-relaxed">
                     I build intelligent web applications and automation tools with a practical, product-first mindset.
                     My stack includes Next.js, Python, n8n, Firebase, Figma, and Shopify integrations.
                   </p>
@@ -81,7 +81,7 @@ export default function AboutPage() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.7, delay: 0.1 }}
-                  className="grid grid-cols-2 gap-4"
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-4"
                 >
                   <div className="glass-chip rounded-2xl overflow-hidden border border-white/80 col-span-2">
                     <div className="relative h-56 sm:h-64">
@@ -108,7 +108,7 @@ export default function AboutPage() {
           <div className="section-wrap">
             <div className="text-center mb-12">
               <p className="text-xs uppercase tracking-[0.25em] text-slate-500 mb-3">Experience Timeline</p>
-              <h2 className="display-title text-4xl sm:text-5xl text-slate-900">Developer and product journey.</h2>
+              <h2 className="display-title text-3xl sm:text-5xl text-slate-900">Developer and product journey.</h2>
             </div>
 
             <div className="space-y-5">

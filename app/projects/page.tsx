@@ -37,16 +37,18 @@ const projects = [
 export default function Projects() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Featured Projects</h1>
-          <p className="text-xl text-gray-300">Explore my latest work and contributions to the tech community</p>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div className="text-center mb-12 sm:mb-16">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+            Featured Projects
+          </h1>
+          <p className="text-base sm:text-xl text-gray-300">Explore my latest work and contributions to the tech community</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project) => (
-            <div key={project.id} className="bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg p-8 border border-cyan-500/30 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/20">
-              <h2 className="text-2xl font-bold mb-2 text-cyan-400">{project.title}</h2>
+            <div key={project.id} className="bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg p-5 sm:p-8 border border-cyan-500/30 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/20">
+              <h2 className="text-xl sm:text-2xl font-bold mb-2 text-cyan-400">{project.title}</h2>
               <p className="text-gray-300 mb-4">{project.description}</p>
               
               <div className="mb-4">
@@ -72,8 +74,8 @@ export default function Projects() {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <a href="/" className="inline-block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+        <div className="mt-12 sm:mt-16 text-center">
+          <a href="/" className="w-full sm:w-auto inline-block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-8 rounded-lg transition-colors">
             Back to Home
           </a>
         </div>

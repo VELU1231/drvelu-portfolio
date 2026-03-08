@@ -32,7 +32,7 @@ const skillCategories = [
 
 export function Skills() {
   return (
-    <section id="skills" className="py-20">
+    <section id="skills" className="py-16 sm:py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -41,15 +41,15 @@ export function Skills() {
         className="section-wrap text-center mb-14"
       >
         <p className="text-xs uppercase tracking-[0.25em] text-slate-500 mb-3">Capabilities</p>
-        <h2 className="display-title text-4xl sm:text-5xl text-slate-900 mb-4">
+        <h2 className="display-title text-3xl sm:text-5xl text-slate-900 mb-4">
           Full-stack skills for modern web products.
         </h2>
-        <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+        <p className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto">
           I design, build, and deploy complete web applications with a focus on performance and automation.
         </p>
       </motion.div>
 
-      <div className="section-wrap grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div className="section-wrap grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
         {skillCategories.map((category, index) => {
           const IconComponent = category.icon;
 
@@ -60,7 +60,7 @@ export function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.55, delay: index * 0.07 }}
-              className="glass-panel rounded-3xl p-6 sm:p-7"
+              className="glass-panel rounded-3xl p-5 sm:p-7"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="h-12 w-12 rounded-xl bg-sky-100 text-sky-700 grid place-items-center">
@@ -69,7 +69,7 @@ export function Skills() {
                 <ArrowUpRight className="h-5 w-5 text-slate-300" />
               </div>
 
-              <h3 className="mt-4 text-xl font-semibold text-slate-900">
+              <h3 className="mt-4 text-lg sm:text-xl font-semibold text-slate-900">
                 {category.category}
               </h3>
 

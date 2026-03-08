@@ -30,13 +30,13 @@ export default function Hero() {
           <div className="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-blue-300/20 blur-3xl animate-pulse-halo" />
 
           <div className="relative z-10 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
-            <motion.div {...heroRevealAnimation} className="space-y-6">
+            <motion.div {...heroRevealAnimation} className="space-y-5 sm:space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full glass-chip px-4 py-2 text-sm font-semibold text-sky-700">
                 <Sparkles className="h-4 w-4" />
                 Full-Stack Developer and Automation Builder
               </div>
 
-              <h1 className="display-title text-4xl sm:text-5xl lg:text-6xl text-slate-900 leading-tight">
+              <h1 className="display-title text-3xl sm:text-5xl lg:text-6xl text-slate-900 leading-tight">
                 Hi, I&apos;m Velu Murugan, I build
                 <br />
                 intelligent web apps
@@ -48,22 +48,22 @@ export default function Hero() {
                 Full-stack developer focused on Python, automation, and modern web applications.
               </p>
 
-              <div className="flex items-center gap-2 text-slate-500 text-sm sm:text-base">
+              <div className="flex flex-wrap items-center gap-2 text-slate-500 text-sm sm:text-base leading-relaxed">
                 <MapPin className="h-4 w-4 text-sky-600" />
                 Santa Rosa City, Laguna, Philippines
               </div>
 
-              <div className="grid grid-cols-3 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 <Stat label="Apps Built" value="12+" />
                 <Stat label="Automations" value="30+" />
                 <Stat label="Focus" value="Full-Stack" />
               </div>
 
-              <div className="flex flex-wrap gap-3 pt-2">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 pt-2">
                 <a
                   href="/VELU-NEW-RESUME.pdf"
                   download
-                  className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
                 >
                   <Download className="h-4 w-4" />
                   Download Resume
@@ -72,7 +72,7 @@ export default function Hero() {
                   href="https://www.linkedin.com/in/velu-2k03"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white/80 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white/80 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-400"
                 >
                   <Linkedin className="h-4 w-4" />
                   LinkedIn Profile
@@ -83,14 +83,14 @@ export default function Hero() {
             <motion.div
               {...heroRevealAnimation}
               transition={{ duration: 0.85, ease: 'easeOut', delay: 0.1 }}
-              className="relative h-[360px] sm:h-[420px] lg:h-[520px]"
+              className="relative h-[330px] sm:h-[420px] lg:h-[520px]"
             >
               <div className="absolute inset-2 rounded-[2rem] border border-white/85 bg-white/40 shadow-[0_24px_60px_rgba(148,163,184,0.28)] backdrop-blur-xl" />
               <div className="absolute inset-6 rounded-[1.8rem] border border-slate-200/70" />
               <div className="absolute inset-x-12 top-12 h-[68%] rounded-full bg-gradient-to-b from-sky-200/55 to-blue-300/35 blur-2xl" />
 
               <motion.div
-                className="absolute inset-x-8 bottom-6 top-16"
+                className="absolute inset-x-8 bottom-9 top-14 sm:bottom-10 sm:top-16 lg:bottom-12"
                 {...portraitFloatAnimation}
               >
                 <Image
@@ -165,7 +165,7 @@ export default function Hero() {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="glass-chip rounded-xl px-3 py-4 text-center border border-white/80">
+    <div className="glass-chip rounded-xl px-3 py-3 sm:py-4 text-center border border-white/80">
       <p className="text-xl sm:text-2xl font-bold text-slate-900">{value}</p>
       <p className="text-xs sm:text-sm text-slate-500">{label}</p>
     </div>

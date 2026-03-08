@@ -28,14 +28,14 @@ const workflowToolset = [
 
 export default function Testimonials() {
   return (
-    <section id="workflow" className="py-20">
+    <section id="workflow" className="py-16 sm:py-20">
       <div className="section-wrap">
         <div className="mb-12 text-center">
           <p className="text-xs uppercase tracking-[0.25em] text-slate-500 mb-3">Developer Workflow</p>
-          <h2 className="display-title text-4xl sm:text-5xl text-slate-900 mb-4">
+          <h2 className="display-title text-3xl sm:text-5xl text-slate-900 mb-4">
             From interface design to production automation.
           </h2>
-          <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto">
             My stack combines UI engineering, backend services, and automated workflows for fast product delivery.
           </p>
         </div>
@@ -48,7 +48,7 @@ export default function Testimonials() {
             transition={{ duration: 0.55 }}
             className="glass-panel rounded-3xl overflow-hidden"
           >
-            <div className="relative h-72 sm:h-80 border-b border-slate-200/60 bg-white/90">
+            <div className="relative h-60 sm:h-80 border-b border-slate-200/60 bg-white/90">
               <Image
                 src="/images/workflows/n8n-workflow.svg"
                 alt="n8n workflow visual"
@@ -57,8 +57,8 @@ export default function Testimonials() {
                 className="object-contain p-6"
               />
             </div>
-            <div className="p-6">
-              <h3 className="text-2xl font-semibold text-slate-900">Automation-first architecture</h3>
+            <div className="p-5 sm:p-6">
+              <h3 className="text-xl sm:text-2xl font-semibold text-slate-900">Automation-first architecture</h3>
               <p className="mt-3 text-slate-600 leading-relaxed">
                 I use n8n workflows to connect apps, trigger webhooks, sync data, and reduce repetitive manual work in
                 product operations.
@@ -74,7 +74,7 @@ export default function Testimonials() {
               transition={{ duration: 0.55, delay: 0.06 }}
               className="glass-panel rounded-3xl overflow-hidden"
             >
-              <div className="relative h-52 border-b border-slate-200/60">
+              <div className="relative h-48 sm:h-52 border-b border-slate-200/60">
                 <Image
                   src="/images/workflows/developer-workflow.jpg"
                   alt="Developer workflow workspace"
@@ -84,7 +84,7 @@ export default function Testimonials() {
                 />
               </div>
               <div className="p-5">
-                <h3 className="text-xl font-semibold text-slate-900">Build, ship, iterate</h3>
+                <h3 className="text-lg sm:text-xl font-semibold text-slate-900">Build, ship, iterate</h3>
                 <p className="mt-2 text-slate-600">
                   Full-stack delivery loop with modern tooling, deployment pipelines, and rapid iteration.
                 </p>
@@ -98,7 +98,7 @@ export default function Testimonials() {
               transition={{ duration: 0.55, delay: 0.12 }}
               className="glass-panel rounded-3xl p-5"
             >
-              <h3 className="text-xl font-semibold text-slate-900">Core tools I use</h3>
+              <h3 className="text-lg sm:text-xl font-semibold text-slate-900">Core tools I use</h3>
               <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {workflowToolset.map((tool) => (
                   <div key={tool.name} className="rounded-2xl border border-slate-200 bg-white/85 p-3">

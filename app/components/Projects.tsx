@@ -98,7 +98,7 @@ const portfolioProjects: PortfolioProject[] = [
 
 export function Projects() {
   return (
-    <section id="achievements" className="py-20">
+    <section id="achievements" className="py-16 sm:py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -107,15 +107,15 @@ export function Projects() {
         className="section-wrap text-center mb-14"
       >
         <p className="text-xs uppercase tracking-[0.25em] text-slate-500 mb-3">Projects</p>
-        <h2 className="display-title text-4xl sm:text-5xl text-slate-900 mb-4">
+        <h2 className="display-title text-3xl sm:text-5xl text-slate-900 mb-4">
           Full-stack products and automation builds.
         </h2>
-        <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+        <p className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto">
           A focused selection of developer projects with modern web architecture and automation-first workflows.
         </p>
       </motion.div>
 
-      <div className="section-wrap grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <div className="section-wrap grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
         {portfolioProjects.map((project, index) => (
           <motion.article
             key={project.id}
@@ -125,7 +125,7 @@ export function Projects() {
             transition={{ duration: 0.55, delay: index * 0.08 }}
             className="glass-panel rounded-3xl overflow-hidden"
           >
-            <div className="relative h-48 border-b border-slate-200/60 bg-white/70">
+            <div className="relative h-44 sm:h-48 border-b border-slate-200/60 bg-white/70">
               <Image
                 src={project.image}
                 alt={project.title}
@@ -135,12 +135,14 @@ export function Projects() {
               />
             </div>
 
-            <div className="p-6">
+            <div className="p-5 sm:p-6">
               <div className="flex items-start justify-between gap-4">
                 <div className="h-11 w-11 rounded-xl bg-sky-100 text-sky-700 grid place-items-center">
                   <project.icon className="h-5 w-5" />
                 </div>
-                <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">{project.date}</span>
+                <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-slate-500 text-right">
+                  {project.date}
+                </span>
               </div>
 
               <h3 className="mt-4 text-xl font-semibold text-slate-900">{project.title}</h3>
@@ -153,7 +155,7 @@ export function Projects() {
                   {project.connectedApps.map((app) => (
                     <span
                       key={`${project.id}-app-${app.name}`}
-                      className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-medium text-slate-700"
+                      className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-medium text-slate-700 whitespace-nowrap"
                     >
                       <Image src={app.icon} alt={`${app.name} logo`} width={14} height={14} />
                       {app.name}
@@ -168,7 +170,7 @@ export function Projects() {
                   {project.technologyStack.map((item) => (
                     <span
                       key={`${project.id}-stack-${item.name}`}
-                      className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-medium text-slate-700"
+                      className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-medium text-slate-700 whitespace-nowrap"
                     >
                       <Image src={item.icon} alt={`${item.name} logo`} width={14} height={14} />
                       {item.name}
@@ -181,7 +183,7 @@ export function Projects() {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-slate-200 bg-white/85 px-3 py-1 text-xs sm:text-sm font-medium text-slate-700"
+                    className="rounded-full border border-slate-200 bg-white/85 px-3 py-1 text-xs sm:text-sm font-medium text-slate-700 whitespace-nowrap"
                   >
                     {tag}
                   </span>
@@ -193,7 +195,7 @@ export function Projects() {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-sky-700 hover:text-sky-900"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-sm font-semibold text-sky-700 hover:text-sky-900"
                 >
                   Open project
                   <ExternalLink className="h-4 w-4" />

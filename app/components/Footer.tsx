@@ -15,16 +15,16 @@ export function Footer() {
   ];
 
   return (
-    <footer className="pb-10 pt-6">
+    <footer className="pb-8 sm:pb-10 pt-6">
       <div className="section-wrap">
         <div className="glass-panel rounded-3xl px-6 py-8 sm:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-center md:text-left">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="display-title text-2xl text-slate-900 mb-2">
+            <h3 className="display-title text-xl sm:text-2xl text-slate-900 mb-2">
               Velu Murugan
             </h3>
             <p className="text-sm text-slate-600 leading-relaxed">
@@ -42,7 +42,7 @@ export function Footer() {
               {[
                 { href: '#home', label: 'Home' },
                 { href: '#skills', label: 'Skills' },
-                { href: '#achievements', label: 'Achievements' },
+                { href: '#achievements', label: 'Projects' },
                 { href: '#contact', label: 'Contact' },
               ].map((item) => (
                 <li key={item.href}>
@@ -93,7 +93,7 @@ export function Footer() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <h4 className="font-semibold text-slate-900 mb-4">Connect</h4>
-            <div className="flex gap-3">
+            <div className="flex gap-3 justify-center md:justify-start">
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <motion.a
                   key={label}
@@ -109,9 +109,9 @@ export function Footer() {
               ))}
             </div>
 
-            <div className="mt-5 flex items-start gap-3 text-sm text-slate-600">
+            <div className="mt-5 flex items-start gap-3 text-sm text-slate-600 justify-center md:justify-start">
               <MapPin className="h-4 w-4 mt-0.5" />
-              Santa Rosa City, Laguna, Philippines
+              <span>Santa Rosa City, Laguna, Philippines</span>
             </div>
           </motion.div>
           </div>
