@@ -1,0 +1,29 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="16" y1="10" x2="112" y2="118" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F725D8" />
+      <stop offset="1" stop-color="#7C4DFF" />
+    </linearGradient>
+    <radialGradient id="coreGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(64 64) rotate(90) scale(54)">
+      <stop stop-color="#FFFFFF" stop-opacity="0.85" />
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0" />
+    </radialGradient>
+    <filter id="softBlur" x="0" y="0" width="128" height="128" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="4" />
+    </filter>
+  </defs>
+
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#bgGradient)" />
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#coreGlow)" />
+
+  <g filter="url(#softBlur)" opacity="0.55">
+    <ellipse cx="64" cy="64" rx="42" ry="14" stroke="#FF66DD" stroke-width="4" />
+    <ellipse cx="64" cy="64" rx="42" ry="14" transform="rotate(60 64 64)" stroke="#DA4BFF" stroke-width="4" />
+    <ellipse cx="64" cy="64" rx="42" ry="14" transform="rotate(-60 64 64)" stroke="#8D66FF" stroke-width="4" />
+  </g>
+
+  <ellipse cx="64" cy="64" rx="42" ry="14" stroke="#FF80E6" stroke-width="3" />
+  <ellipse cx="64" cy="64" rx="42" ry="14" transform="rotate(60 64 64)" stroke="#E76CFF" stroke-width="3" />
+  <ellipse cx="64" cy="64" rx="42" ry="14" transform="rotate(-60 64 64)" stroke="#B08BFF" stroke-width="3" />
+  <circle cx="64" cy="64" r="7.5" fill="#FFFFFF" />
+</svg>
