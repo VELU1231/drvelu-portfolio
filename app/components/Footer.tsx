@@ -1,124 +1,106 @@
 'use client';
 
-import { Github, Linkedin, Twitter, Mail, Heart } from 'lucide-react';
-import Link from 'next/link';
+import { Github, Linkedin, Mail, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+const footerLinks = [
+  { name: 'Home', href: '#home' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Blog', href: '#blog' },
+  { name: 'Contact', href: '#contact' },
+];
+
+const socialLinks = [
+  { icon: Github, href: 'https://github.com/VELU1231', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://linkedin.com/in/velu', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:velu@drvelu.com', label: 'Email' },
+];
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  
-  const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Mail, href: 'mailto:velu@example.com', label: 'Email' },
-  ];
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
-    <footer className="bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-gray-800">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+    <footer className="border-t border-white/[0.06] bg-[#08080c]">
+      <div className="section-container py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
           {/* Brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h3 className="text-lg font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent mb-2">
-              Velu
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
-              Full-stack developer crafting beautiful, functional web experiences.
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center font-bold text-white text-xs">
+                V
+              </div>
+              <span className="font-semibold text-white">Velu Murugan</span>
+            </div>
+            <p className="text-white/40 text-sm leading-relaxed max-w-xs">
+              Full-stack developer crafting modern web experiences.
             </p>
-          </motion.div>
+          </div>
 
           {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Quick Links</h4>
+          <div>
+            <h4 className="font-semibold text-white text-sm mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              {['Home', 'Projects', 'Skills', 'Blog', 'Contact'].map((item) => (
-                <li key={item}>
-                  <Link
-                    href={`#${item.toLowerCase()}`}
-                    className="text-gray-600 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+              {footerLinks.map((link) => (
+                <li key={link.name}>
+                  <a
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className="text-white/40 hover:text-white/80 transition-colors text-sm"
                   >
-                    {item}
-                  </Link>
+                    {link.name}
+                  </a>
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          {/* Resources */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Resources</h4>
-            <ul className="space-y-2">
-              {['Blog', 'Documentation', 'GitHub', 'Resume'].map((item) => (
-                <li key={item}>
-                  <Link
-                    href="#"
-                    className="text-gray-600 dark:text-gray-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <h4 className="font-semibold text-gray-900 dark:text-white mb-4">Follow</h4>
-            <div className="flex gap-3">
+          {/* Social */}
+          <div>
+            <h4 className="font-semibold text-white text-sm mb-4">Connect</h4>
+            <div className="flex gap-2">
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <motion.a
                   key={label}
                   href={href}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   aria-label={label}
-                  whileHover={{ scale: 1.2, rotate: 10 }}
-                  className="p-2 bg-gray-200 dark:bg-gray-700 rounded-full hover:bg-cyan-500 hover:text-white transition-all"
+                  whileHover={{ scale: 1.1 }}
+                  className="p-2.5 bg-white/[0.05] rounded-lg hover:bg-white/[0.1] transition-colors"
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-4 h-4 text-white/60" />
                 </motion.a>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-gray-200 dark:border-gray-800 pt-8">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col md:flex-row justify-between items-center gap-4"
-          >
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
-              © {currentYear} Velu Murugan. All rights reserved.
-            </p>
-            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-              Made with
-              <motion.span
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <Heart className="w-4 h-4 text-red-500" />
-              </motion.span>
-              by Velu
-            </div>
-          </motion.div>
+        {/* Divider & Copyright */}
+        <div className="border-t border-white/[0.06] pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-white/30 text-xs">
+            &copy; {currentYear} Velu Murugan. All rights reserved.
+          </p>
+          <div className="flex items-center gap-1.5 text-xs text-white/30">
+            Made with
+            <motion.span
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <Heart className="w-3.5 h-3.5 text-red-400 fill-red-400" />
+            </motion.span>
+            by Velu
+          </div>
         </div>
       </div>
     </footer>

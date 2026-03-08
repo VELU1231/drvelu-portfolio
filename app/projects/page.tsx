@@ -1,9 +1,15 @@
-import Footer from '../components/Footer';
+'use client';
+
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { Footer } from '../components/Footer';
+import { Navbar } from '../components/Navbar';
+
 const projects = [
   {
     id: 1,
     title: 'E-Commerce Platform',
-    description: 'A full-stack e-commerce solution featuring real-time inventory management, secure payment processing, and advanced search capabilities.',
+    description: 'A full-stack e-commerce solution with real-time inventory management, secure payment processing, and advanced search.',
     technologies: ['React', 'Node.js', 'MongoDB', 'Stripe API'],
     highlights: ['Real-time Inventory', 'Payment Integration', 'Admin Dashboard'],
     impact: 'Increased conversion rate by 40% with optimized UX',
@@ -11,7 +17,7 @@ const projects = [
   {
     id: 2,
     title: 'SaaS Analytics Dashboard',
-    description: 'Enterprise-grade analytics platform providing real-time data visualization, predictive analytics, and customizable reporting for businesses.',
+    description: 'Enterprise analytics platform with real-time data visualization, predictive analytics, and customizable reporting.',
     technologies: ['Next.js', 'TypeScript', 'PostgreSQL', 'D3.js'],
     highlights: ['Real-time Analytics', 'Custom Reports', 'Data Security'],
     impact: 'Served 500+ enterprise clients with 99.9% uptime',
@@ -19,7 +25,7 @@ const projects = [
   {
     id: 3,
     title: 'Mobile App - Fitness Tracker',
-    description: 'Cross-platform mobile application for fitness tracking with machine learning-powered workout recommendations and community features.',
+    description: 'Cross-platform mobile application for fitness tracking with ML-powered workout recommendations.',
     technologies: ['React Native', 'Firebase', 'ML Kit', 'Redux'],
     highlights: ['Offline Sync', 'ML Recommendations', 'Social Features'],
     impact: '50k+ downloads with 4.8-star rating',
@@ -27,7 +33,7 @@ const projects = [
   {
     id: 4,
     title: 'AI-Powered Content Generator',
-    description: 'Advanced AI tool for generating high-quality content with natural language processing, supporting multiple languages and content types.',
+    description: 'Advanced AI tool for generating high-quality content with NLP, supporting multiple languages.',
     technologies: ['Python', 'TensorFlow', 'FastAPI', 'React'],
     highlights: ['Multi-language Support', 'Content Templates', 'API Integration'],
     impact: 'Reduced content creation time by 70%',
@@ -36,46 +42,69 @@ const projects = [
 
 export default function Projects() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Featured Projects</h1>
-          <p className="text-xl text-gray-300">Explore my latest work and contributions to the tech community</p>
-        </div>
+    <div className="min-h-screen bg-[#0a0a0f] text-white">
+      <Navbar />
+      <div className="section-container py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-4xl sm:text-5xl font-bold gradient-text mb-4">
+            Featured Projects
+          </h1>
+          <p className="text-white/50 text-lg">
+            Explore my latest work and contributions to the tech community
+          </p>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project) => (
-            <div key={project.id} className="bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg p-8 border border-cyan-500/30 hover:border-cyan-500 transition-all hover:shadow-lg hover:shadow-cyan-500/20">
-              <h2 className="text-2xl font-bold mb-2 text-cyan-400">{project.title}</h2>
-              <p className="text-gray-300 mb-4">{project.description}</p>
-              
+        <div className="grid md:grid-cols-2 gap-6">
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="glass-card-hover p-6"
+            >
+              <h2 className="text-xl font-bold mb-2 text-white">{project.title}</h2>
+              <p className="text-white/50 text-sm mb-4">{project.description}</p>
+
               <div className="mb-4">
-                <p className="text-sm font-semibold text-purple-400 mb-2">Technologies:</p>
-                <div className="flex flex-wrap gap-2">
+                <p className="text-xs font-semibold text-violet-400 mb-2">Technologies:</p>
+                <div className="flex flex-wrap gap-1.5">
                   {project.technologies.map((tech, i) => (
-                    <span key={i} className="px-2 py-1 bg-slate-900 rounded text-sm text-gray-300">{tech}</span>
+                    <span key={i} className="px-2.5 py-1 text-xs bg-violet-500/10 text-violet-300 rounded-md border border-violet-500/15">
+                      {tech}
+                    </span>
                   ))}
                 </div>
               </div>
 
               <div className="mb-4">
-                <p className="text-sm font-semibold text-green-400 mb-2">Highlights:</p>
-                <ul className="text-sm text-gray-300 space-y-1">
-                  {project.highlights.map((highlight, i) => (
-                    <li key={i} className="flex items-center"><span className="mr-2">→</span>{highlight}</li>
+                <p className="text-xs font-semibold text-emerald-400 mb-2">Highlights:</p>
+                <ul className="text-xs text-white/50 space-y-1">
+                  {project.highlights.map((h, i) => (
+                    <li key={i} className="flex items-center gap-2">
+                      <span className="text-emerald-400">→</span>{h}
+                    </li>
                   ))}
                 </ul>
               </div>
 
-              <p className="text-sm text-yellow-400 italic">{project.impact}</p>
-            </div>
+              <p className="text-xs text-amber-400/80 italic">{project.impact}</p>
+            </motion.div>
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <a href="/" className="inline-block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+        <div className="mt-12 text-center">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-violet-600 to-blue-600 text-white font-semibold rounded-xl text-sm"
+          >
             Back to Home
-          </a>
+          </Link>
         </div>
       </div>
       <Footer />

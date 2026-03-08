@@ -1,24 +1,23 @@
 'use client';
+
 import { useState } from 'react';
-import { Footer } from '../../components/Footer';function GameShowcase() {
-  const [flappyScore, setFlappyScore] = useState(0);
+import { Footer } from '../../components/Footer';
+import { Navbar } from '../../components/Navbar';
+import Link from 'next/link';
+
+export default function GameShowcase() {
+  const [flappyScore] = useState(0);
   const [gameRunning, setGameRunning] = useState(false);
-  const [ticTacBoard, setTicTacBoard] = useState(Array(9).fill(null));
+  const [ticTacBoard, setTicTacBoard] = useState<(string | null)[]>(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
 
   const handleFlappyClick = () => {
-    if (gameRunning) {
-      setFlappyScore(0);
-    }
-    setGameRunning(!gameRunning);
     setGameRunning(true);
     setTimeout(() => setGameRunning(false), 10000);
   };
 
-  const handleTicTacClick = (index) => {
-    if (ticTacBoard[index]) {
-      return;
-    }
+  const handleTicTacClick = (index: number) => {
+    if (ticTacBoard[index]) return;
     const newBoard = [...ticTacBoard];
     newBoard[index] = isXNext ? 'X' : 'O';
     setTicTacBoard(newBoard);
@@ -31,53 +30,73 @@ import { Footer } from '../../components/Footer';function GameShowcase() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div className="min-h-screen bg-[#0a0a0f] text-white">
+      <Navbar />
+      <div className="section-container py-24">
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Games & Apps</h1>
-          <p className="text-xl text-gray-300">Explore interactive games and applications built with cutting-edge technologies.</p>
+          <h1 className="text-4xl sm:text-5xl font-bold gradient-text mb-4">
+            Games & Apps
+          </h1>
+          <p className="text-white/50 text-lg">
+            Interactive games and applications built with cutting-edge technologies.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg p-8 border border-cyan-500/30 hover:border-cyan-500 transition-all">
-            <h2 className="text-2xl font-bold mb-4 text-cyan-400">Flappy Bird Clone</h2>
-            <p className="text-gray-300 mb-6">Classic Flappy Bird game built with React. Click to make the bird jump and avoid obstacles!</p>
-            <div className="bg-slate-900 rounded-lg p-6 mb-4 h-40 flex items-center justify-center">
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="glass-card-hover p-6">
+            <h2 className="text-xl font-bold mb-4 text-blue-400">Flappy Bird Clone</h2>
+            <p className="text-white/50 text-sm mb-6">
+              Classic Flappy Bird game built with React.
+            </p>
+            <div className="bg-white/[0.03] rounded-xl p-6 mb-4 h-40 flex items-center justify-center">
               <div className="text-center">
-                <p className="text-3xl font-bold text-cyan-400">{flappyScore}</p>
-                <p className="text-gray-400">Score</p>
+                <p className="text-3xl font-bold text-blue-400">{flappyScore}</p>
+                <p className="text-white/30 text-sm">Score</p>
               </div>
             </div>
-            <button onClick={handleFlappyClick} className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded transition-colors">
+            <button
+              onClick={handleFlappyClick}
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold py-2.5 px-4 rounded-xl transition-all text-sm border-none"
+            >
               {gameRunning ? 'Game Running...' : 'Play Game'}
             </button>
           </div>
 
-          <div className="bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg p-8 border border-purple-500/30 hover:border-purple-500 transition-all">
-            <h2 className="text-2xl font-bold mb-4 text-purple-400">Tic Tac Toe</h2>
-            <p className="text-gray-300 mb-6">Classic Tic Tac Toe game. Play against the simple AI or another player!</p>
-            <div className="grid grid-cols-3 gap-2 mb-6 bg-slate-900 p-4 rounded-lg">
+          <div className="glass-card-hover p-6">
+            <h2 className="text-xl font-bold mb-4 text-violet-400">Tic Tac Toe</h2>
+            <p className="text-white/50 text-sm mb-6">
+              Classic Tic Tac Toe game.
+            </p>
+            <div className="grid grid-cols-3 gap-2 mb-6 bg-white/[0.03] p-4 rounded-xl">
               {ticTacBoard.map((cell, index) => (
-                <button key={index} onClick={() => handleTicTacClick(index)} className="w-16 h-16 bg-slate-800 border border-purple-500 rounded text-2xl font-bold text-purple-400 hover:bg-slate-700 transition-colors">
+                <button
+                  key={index}
+                  onClick={() => handleTicTacClick(index)}
+                  className="w-16 h-16 bg-white/[0.05] border border-violet-500/20 rounded-lg text-2xl font-bold text-violet-400 hover:bg-white/[0.1] transition-colors"
+                >
                   {cell}
                 </button>
               ))}
             </div>
-            <button onClick={resetTicTac} className="w-full bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded transition-colors">
+            <button
+              onClick={resetTicTac}
+              className="w-full bg-gradient-to-r from-violet-600 to-violet-500 hover:from-violet-500 hover:to-violet-400 text-white font-semibold py-2.5 px-4 rounded-xl transition-all text-sm border-none"
+            >
               New Game
             </button>
           </div>
         </div>
 
-        <div className="mt-16 text-center">
-          <a href="/" className="inline-block bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-8 rounded-lg transition-colors">
+        <div className="mt-12 text-center">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-violet-600 to-blue-600 text-white font-semibold rounded-xl text-sm"
+          >
             Back to Home
-          </a>
+          </Link>
         </div>
       </div>
       <Footer />
     </div>
   );
 }
-
-export default GameShowcase;

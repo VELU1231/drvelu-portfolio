@@ -1,64 +1,132 @@
 'use client';
 
-import Link from 'next/link';
-import { ThemeToggle } from './ThemeToggle';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+
+const navLinks = [
+  { name: 'Home', href: '#home' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Blog', href: '#blog' },
+  { name: 'Contact', href: '#contact' },
+];
 
 export function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsOpen(false);
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-gray-200 dark:border-gray-700"
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-[#0a0a0f]/80 backdrop-blur-xl border-b border-white/[0.06]'
+          : 'bg-transparent'
+      }`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="section-container">
         <div className="flex justify-between items-center h-16">
-          {/* Logo/Brand */}
-          <Link href="/" className="flex items-center space-x-2 group">
+          {/* Logo */}
+          <a
+            href="#home"
+            onClick={(e) => handleNavClick(e, '#home')}
+            className="flex items-center gap-2 group"
+          >
             <motion.div
-              whileHover={{ scale: 1.1 }}
-              className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center group-hover:shadow-lg group-hover:shadow-cyan-500/50 transition-all"
+              whileHover={{ scale: 1.05 }}
+              className="w-9 h-9 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center font-bold text-white text-sm"
             >
-              <span className="text-white font-bold text-lg">V</span>
+              V
             </motion.div>
-            <span className="hidden sm:inline font-bold text-lg bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
+            <span className="font-semibold text-white/90 hidden sm:inline">
               Velu
             </span>
-          </Link>
+          </a>
 
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            <NavLink href="#home">Home</NavLink>
-                      <NavLink href="/about">About</NavLink>
-            <NavLink href="#projects">Projects</NavLink>
-            <NavLink href="#skills">Skills</NavLink>
-                      <NavLink href="/apps">Games & Apps</NavLink>
-            <NavLink href="#blog">Blog</NavLink>
-            <NavLink href="#contact">Contact</NavLink>
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <NavLink key={link.name} href={link.href} onClick={handleNavClick}>
+                {link.name}
+              </NavLink>
+            ))}
           </div>
 
-          {/* Theme Toggle */}
-          <ThemeToggle />
+          {/* Mobile Hamburger */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 text-white/70 hover:text-white bg-transparent border-none"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden bg-[#0a0a0f]/95 backdrop-blur-xl border-b border-white/[0.06] overflow-hidden"
+          >
+            <div className="section-container py-4 flex flex-col gap-1">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="px-4 py-3 text-white/70 hover:text-white hover:bg-white/[0.05] rounded-lg transition-colors text-sm font-medium"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }
 
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+function NavLink({
+  href,
+  children,
+  onClick,
+}: {
+  href: string;
+  children: React.ReactNode;
+  onClick: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
+}) {
   return (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-      className="relative"
+    <a
+      href={href}
+      onClick={(e) => onClick(e, href)}
+      className="relative px-4 py-2 text-sm font-medium text-white/60 hover:text-white transition-colors group"
     >
-      <Link
-        href={href}
-        className="text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 font-medium transition-colors relative group"
-      >
-        {children}
-        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-600 group-hover:w-full transition-all duration-300"></span>
-      </Link>
-    </motion.div>
+      {children}
+      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-violet-400 to-blue-400 group-hover:w-3/4 transition-all duration-300 rounded-full" />
+    </a>
   );
 }
